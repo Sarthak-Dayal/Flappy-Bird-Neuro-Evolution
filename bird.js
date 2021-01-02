@@ -73,7 +73,7 @@ class Bird {
     }
   }
   mutate() {
-    this.brain.mutate(mutation);
+    this.brain.mutate(0.1);
   }
 
   offscreen() {
