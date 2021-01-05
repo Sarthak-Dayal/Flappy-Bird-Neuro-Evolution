@@ -1,7 +1,6 @@
 // Genetic Algorithm
 
 function nextGen() {
-  console.log("Next Generation");
 
   calculateFitness();
 
@@ -29,7 +28,7 @@ function pickOne() {
   }
   index--;
   let bird = savedBirds[index];
-  let child = new Bird(bird.brain);
+  let child = new Bird(birdImage, bird.brain);
   child.mutate();
   return child;
 }

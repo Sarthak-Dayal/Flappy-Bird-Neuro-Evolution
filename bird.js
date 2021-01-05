@@ -1,23 +1,17 @@
 function mutation(x) {
   let num = random(1);
-  if(num < 0.05){
-    return random(1);  
+  if (num < 0.05) {
+    return random(1);
   } else {
     return x;
   }
 }
 
-//Code Taken from The Coding Train
-// Daniel Shiffman
-// http://codingtra.in
-// http://patreon.com/codingtrain
-// Code for: https://youtu.be/cXgA1d_E-jY&
-
 class Bird {
-  constructor(brain) {
+  constructor(img, brain) {
     this.y = height / 2;
     this.x = 64;
-
+    this.img = img;
     this.gravity = 0.7;
     this.lift = -12;
     this.velocity = 0;
@@ -30,9 +24,13 @@ class Bird {
     this.fitness;
   }
   show() {
-    stroke(255);
-    fill(255, 50);
-    ellipse(this.x, this.y, 32, 32);
+    if (this.img) {
+      image(this.img, this.x, this.y);
+    } else {
+      stroke(255);
+      fill(255, 50);
+      ellipse(this.x, this.y, 32, 32);
+    }
   };
 
   up() {
@@ -54,7 +52,7 @@ class Bird {
     let closestD = Infinity;
 
     for (let i = 0; i < pipes.length; i++) {
-      let d = pipes[i].x  + pipes[i].w - this.x;
+      let d = pipes[i].x + pipes[i].w - this.x;
       if (d < closestD && d > 0) {
         closest = pipes[i];
         closestD = d;

@@ -1,0 +1,10 @@
+html,
+
+body {
+  background-color: black;
+}
+
+p {
+  color: white;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}

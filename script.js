@@ -1,37 +1,49 @@
-const TOTAL = 1000;
+p5.disableFriendlyErrors = true;
+const TOTAL = 250;
 const CYCLES = 100;
-let generation = 0;
+let generation = 1;
 let birds = [];
 let pipes = [];
 let savedBirds = [];
 let counter = 0;
 let slider;
-let pipespassed =0;
+let pipespassed = 0;
+let generationHTML;
+let pipespassedHTML;
+let speedHTML;
+let numBirdsHTML;
+let birdImage;
 
-function keyPressed() {
-  if(key === 'S') {
-    let bird = birds[0];
-    let json = JSON.stringify(bird.brain);
-    saveJson(bird.brain, 'bird.json');
-  }
+function preload() {
+  birdImage = loadImage("bird.png");
 }
-
 
 function setup() {
-  slider = createSlider(1, 100, 1);
+
+  slider = createSlider(1, 10, 1);
+
+  speedHTML = createP('Speed: ' + slider.value() + 'x');
+  speedHTML.style('font-family', 'verdana');
+
+  generationHTML = createP('Generation: ' + generation);
+  generationHTML.style('font-family', 'verdana');
+
+  numBirdsHTML = createP('# of Birds: ' + birds.length);
+
+  pipespassedHTML = createP('Pipes Passed: ' + pipespassed);
+  pipespassedHTML.style('font-family', 'verdana');
 
   for (let i = 0; i < TOTAL; i++) {
-    birds[i] = new Bird();
+    birds[i] = new Bird(birdImage);
   }
-  createCanvas(640, 480);
+  createCanvas(windowWidth - windowWidth / 100, 480);
 
-  pipes.push(new Pipe());
 }
 
-function draw() {
-  //console.log(frameCount);
+function draw() { 
   for (let i = 0; i < slider.value(); i++) {
-
+    speedHTML.html('Speed: ' + slider.value() + 'x');
+    numBirdsHTML.html('# of Birds: ' + birds.length);
     if (counter % 75 == 0) {
       pipes.push(new Pipe());
     }
@@ -49,7 +61,7 @@ function draw() {
       if (pipes[i].offscreen()) {
         pipes.splice(i, 1);
         pipespassed++;
-        console.log("Pipes Passed: "+ pipespassed);
+        pipespassedHTML.html('Pipes Passed: ' + pipespassed);
       }
     }
     for (let j = birds.length - 1; j >= 0; j--) {
@@ -66,8 +78,9 @@ function draw() {
       counter = 0;
       nextGen();
       pipespassed = 0;
+      pipespassedHTML.html('Pipes Passed: ' + pipespassed);
       generation++;
-      console.log("Generation: " + generation);
+      generationHTML.html('Generation: ' + generation);
       pipes = [];
     }
   }

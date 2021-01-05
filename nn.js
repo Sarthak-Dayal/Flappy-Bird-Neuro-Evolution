@@ -53,12 +53,14 @@ class NeuralNetwork {
     let inputs = Matrix.fromArray(input_array);
     let hidden = Matrix.multiply(this.weights_ih, inputs);
     hidden.add(this.bias_h);
+
     // Activation Function
     hidden.map(sigmoid);
 
     // Generate final output
     let output = Matrix.multiply(this.weights_ho, hidden);
     output.add(this.bias_o);
+    
     // Activation
     output.map(sigmoid);
 
@@ -146,6 +148,7 @@ class NeuralNetwork {
         return val;
       }
     }
+    
     this.weights_ih.map(mutate);
     this.weights_ho.map(mutate);
     this.bias_h.map(mutate);
