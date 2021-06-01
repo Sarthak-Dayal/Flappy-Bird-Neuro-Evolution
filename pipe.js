@@ -1,5 +1,5 @@
 class Pipe {
-  constructor() {
+  constructor(top_img, bot_img) {
     this.spacing = 125;
     this.top = random(height / 6, (3 / 4) * height);
     this.bottom = height - (this.top + this.spacing);
@@ -8,6 +8,8 @@ class Pipe {
     this.speed = 6;
 
     this.highlight = false;
+    this.top_img = top_img;
+    this.bot_img = bot_img;
   }
   hits(bird) {
     if (bird.y < this.top || bird.y > height - this.bottom) {
@@ -27,6 +29,9 @@ class Pipe {
     }
     rect(this.x, 0, this.w, this.top);
     rect(this.x, height - this.bottom, this.w, this.bottom);
+    
+    image(this.top_img, this.x, 0, this.w, this.top);
+    image(this.bot_img, this.x, height - this.bottom, this.w, this.bottom);
   };
 
   update() {

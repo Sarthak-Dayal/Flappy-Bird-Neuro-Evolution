@@ -1,51 +1,57 @@
-p5.disableFriendlyErrors = true;
-const TOTAL = 250;
-const CYCLES = 100;
+const TOTAL = 500;
 let generation = 1;
 let birds = [];
 let pipes = [];
 let savedBirds = [];
 let counter = 0;
 let slider;
-let pipespassed = 0;
+let score = 0;
 let generationHTML;
-let pipespassedHTML;
+let scoreHTML;
 let speedHTML;
-let numBirdsHTML;
+let aliveHTML;
 let birdImage;
+let bg;
+let ground;
+let pipe;
 
 function preload() {
-  birdImage = loadImage("bird.png");
+  birdImage = loadImage("assets/bird.png");
+  bg = loadImage("assets/background.png");
+  ground = loadImage("assets/ground.png");
+  bot_pipe = loadImage("assets/pipe_bottom.png");
+  top_pipe = loadImage("assets/pipe_top.png");
 }
 
 function setup() {
 
   slider = createSlider(1, 10, 1);
 
-  speedHTML = createP('Speed: ' + slider.value() + 'x');
-  speedHTML.style('font-family', 'verdana');
+  speedHTML = createP('Speed: ' + slider.value() + 'x');  
+  speedHTML.id("speed");
 
   generationHTML = createP('Generation: ' + generation);
-  generationHTML.style('font-family', 'verdana');
+  generationHTML.id("generation");
 
-  numBirdsHTML = createP('# of Birds: ' + birds.length);
+  aliveHTML = createP('# of Birds: ' + birds.length);
+  aliveHTML.id("alive");
 
-  pipespassedHTML = createP('Pipes Passed: ' + pipespassed);
-  pipespassedHTML.style('font-family', 'verdana');
+  scoreHTML = createP('Score: ' + score);
+  scoreHTML.id("score");
 
   for (let i = 0; i < TOTAL; i++) {
     birds[i] = new Bird(birdImage);
   }
-  createCanvas(windowWidth - windowWidth / 100, 480);
+  createCanvas(windowWidth , windowWidth * 0.4);
 
 }
 
 function draw() { 
   for (let i = 0; i < slider.value(); i++) {
     speedHTML.html('Speed: ' + slider.value() + 'x');
-    numBirdsHTML.html('# of Birds: ' + birds.length);
+    aliveHTML.html('Alive: ' + birds.length);
     if (counter % 75 == 0) {
-      pipes.push(new Pipe());
+      pipes.push(new Pipe(top_pipe, bot_pipe));
     }
     counter++;
 
@@ -60,8 +66,8 @@ function draw() {
 
       if (pipes[i].offscreen()) {
         pipes.splice(i, 1);
-        pipespassed++;
-        pipespassedHTML.html('Pipes Passed: ' + pipespassed);
+        score++;
+        scoreHTML.html('Score: ' + score);
       }
     }
     for (let j = birds.length - 1; j >= 0; j--) {
@@ -77,14 +83,14 @@ function draw() {
     if (birds.length == 0) {
       counter = 0;
       nextGen();
-      pipespassed = 0;
-      pipespassedHTML.html('Pipes Passed: ' + pipespassed);
+      score = 0;
+      scoreHTML.html('Score: ' + score);
       generation++;
       generationHTML.html('Generation: ' + generation);
       pipes = [];
     }
   }
-  background(0);
+  background(bg);
   for (let bird of birds) {
     bird.show();
   }
@@ -92,7 +98,12 @@ function draw() {
   for (let pipe of pipes) {
     pipe.show();
   }
+
+  image(ground, 0, height-0.05*height);
   
 
 }
 
+function windowResized() {
+  resizeCanvas(windowWidth, windowWidth * 0.4);
+}
