@@ -1,4 +1,4 @@
-# Flappy Bird Neuro Evolution
+# Flappy Bird Neuroevolution
 A demonstration of neuro-evolution using the game Flappy Bird written in p5.js using a custom genetic algorithm and machine learning library inspired by [The Coding Train](https://thecodingtrain.com/).
 ![image](https://user-images.githubusercontent.com/63827830/120264772-1a60c600-c264-11eb-954c-2b295834ce23.png)
 
