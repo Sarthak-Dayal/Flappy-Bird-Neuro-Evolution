@@ -7,6 +7,7 @@ function mutation(x) {
   }
 }
 
+
 class Bird {
   constructor(img, brain) {
     this.y = height / 2;
@@ -15,11 +16,13 @@ class Bird {
     this.gravity = 0.7;
     this.lift = -12;
     this.velocity = 0;
+
     if (brain) {
       this.brain = brain.copy();
     } else {
       this.brain = new NeuralNetwork(5, 16, 2);
     }
+    
     this.score = 0;
     this.fitness;
   }

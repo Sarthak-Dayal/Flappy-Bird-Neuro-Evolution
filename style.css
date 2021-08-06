@@ -1,16 +1,16 @@
 html,
 
 body {
-  background-color: #008793;
+  background-color: #F2F3F4;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   width: 100vw;
   overflow-x: hidden;
   margin: 0;
-  color: white;
+  color: #202020;
 }
 
 p {
-  color: white;
+  color: #202020;
   font-size: 1.7vw;
 }
 
