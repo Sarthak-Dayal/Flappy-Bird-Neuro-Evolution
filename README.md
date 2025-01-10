@@ -8,4 +8,4 @@ A demonstration of neuro-evolution using the game Flappy Bird written in p5.js u
 
 In order to use this project, [go here](https://sarthak-dayal.github.io/Flappy-Bird-Neuro-Evolution/). The speed of the game (and the training) can be changed by adjusting the slider.
 
-This game was built with a custom neural network as well as custon graphics using p5.js. Later, I transfered the Neural Network to TensorFlow to make things faster when deploying the website.
+This game was built with custom neural network and matrix libraries written from scratch in JavaScript as well as custom graphics using p5.js. Later, I transfered the Neural Network to TensorFlow to make things faster when deploying the website.
